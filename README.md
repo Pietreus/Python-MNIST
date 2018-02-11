@@ -1,7 +1,7 @@
 # Python-MNIST
 This Python Script reads in the data from the MNIST database and trains
 a four layer feed forward network via backpropagation and stochastic gradient descent
-to recognize the the digit displayed in a given Picture (28x28 pixels).
+to recognize the digit displayed in a given Picture (28x28 pixels).
 
 I only used numpy and python-mnist for the script to understand the maths
 behind the backpropagation itself better.
