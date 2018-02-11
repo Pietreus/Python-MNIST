@@ -19,7 +19,7 @@ for i in range(len(testLabels)):
 #using the seed so results can be reproduced
 np.random.seed(1)
 
-#setting up the variables for the network:
+#setting up the weights for the network:
 #784 inputs + 1 bias -> 40 neurons + 1 bias -> 16 neurons + 1 bias -> 10 outputs
 
 weights0 = 2 * np.random.random((785, 40)) - 1
@@ -27,9 +27,9 @@ weights1 = 2 * np.random.random((41, 16)) - 1
 weights2 = 2 * np.random.random((17, 10)) - 1
 
 def sigmoid(x, deriv = False):
-    if(deriv==True):
-        return x*(1-x)
-    return 1/(1+np.exp(-x))
+    if(deriv == True):
+        return x * (1 - x)
+    return 1 / (1 + np.exp(-x))
 
 def predict(inputs): #takes 1x784 Vector as input returns a one hot 1x10 vector
     inputs = np.insert(np.array(inputs), 784, 1, axis = 1)
@@ -79,10 +79,11 @@ def train(inputs, outputs, sampleSize, epochSize, iterations, learningRate):
         error = 0
         for epoch in range(epochSize, sampleSize, epochSize):
             error = backprop(outputs[int(epoch-epochSize):epoch], inputs[int(epoch-epochSize):epoch], epochSize, learningRate)
+        """
         if i % 20 == 0:
             print("Iteration: " + str(i))
             print("Error: " + str(error))
-
+        """
 def test(outputsEnabled = False):
     pred = predict(testImgs)
     testPred = softmax(pred) # returns the "guesses" of the network
@@ -99,6 +100,6 @@ def test(outputsEnabled = False):
 print("before training: ")
 print("Right guesses: " + str(test()) + "%")
 
-train(images, output, 60000, 1, 1, 0.002)
+train(images, output, 60000, 1000, 1000, 0.002)
 print("after training: ")
 print("Right guesses: " + str(test()) + "%")
